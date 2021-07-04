@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import AlbumsList from './components/albums/albums-list/albums-list';
+import api from './api/photos';
 
-function App() {
+const App: React.FC = () => {
+  const [photos, setPhotos] = useState([]);
+  const fetchPhotos = async (url: string) => {
+    try {
+      const response = await api.get(url);
+      const data = await response.data.slice(0, 20);
+      setPhotos(data);
+    } catch (error) {
+      console.log(error);
+      alert(error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchPhotos('/');
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <AlbumsList photos={photos} />
     </div>
   );
-}
+};
 
 export default App;
+
+// https://www.youtube.com/watch?v=Z5iWr6Srsj8&t=2s&ab_channel=BenAwad
+// https://www.youtube.com/watch?v=cHYWsRflH-s&t=1766s&ab_channel=ChillOut%26LofiMusic

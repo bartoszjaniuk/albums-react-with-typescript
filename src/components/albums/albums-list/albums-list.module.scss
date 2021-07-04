@@ -1,0 +1,13 @@
+.albums {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  grid-gap: 2rem;
+  gap: 2rem;
+  border-radius: 5px;
+  margin-top: 3rem;
+  background-color: burlywood;
+}
